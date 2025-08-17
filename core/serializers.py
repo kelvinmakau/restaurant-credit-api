@@ -53,7 +53,7 @@ class OrderSerializer(serializers.ModelSerializer):
             'created_by', # FK to User (Input as ID)
         ]
 
-        read_only_fields = ['id', 'created_at', 'total_price']
+        read_only_fields = ['id', 'created_at', 'total_price', 'is_paid']
 
     # Quantity validator Ensure its a positive value
     def validate_quantity(self, value):
@@ -74,4 +74,16 @@ class OrderSerializer(serializers.ModelSerializer):
         quantity = validated_data.get("quantity", instance.quantity)
         validated_data["total_price"] = meal.price * quantity
         return super().update(instance, validated_data)
+    
+# payment serializer
+class PaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Payment
+        fields = ['id', 'order', 'amount', 'payment_date', 'status']
+        read_only_fields = ['id', 'payment_date']
+
+        def validate_amount(self, value):
+            if value <= 0:
+                raise serializers.ValidationError("Payment amount must be greater than zero")
+            return value
     
