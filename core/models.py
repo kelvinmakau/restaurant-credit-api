@@ -7,7 +7,6 @@ from django.utils import timezone
 
 # Custom user with roles
 class User(AbstractUser): 
-    full_name = models.CharField(max_length=100, blank=True)  # Full name of the user
     phone_number = models.CharField(max_length=15, unique=True, blank=True)  # User phone number
     ROLE_CHOICES = ( # Defining my user roles
         ('ADMIN', 'ADMIN'), # Admin role
