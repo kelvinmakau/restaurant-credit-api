@@ -35,6 +35,7 @@ class Meal(models.Model):
     name = models.CharField(max_length=100) # Meal name
     description =  models.TextField(blank=True) # Meal description, optional
     price = models.DecimalField(max_digits=10, decimal_places=2) # Meal price
+    date_created = models.DateField(auto_now_add=True) # Date when the meal was created
 
     def __str__(self):
         return f"{self.name} - {self.price}" # Meal name and price

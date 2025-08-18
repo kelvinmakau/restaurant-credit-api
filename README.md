@@ -11,7 +11,6 @@ Using Postman, use the below endpoints
 Get the auth token and input it at the Bearer Token in Postman using the following endpoint:
 http://127.0.0.1:8000/api/auth-token
 
-
 List all customers
 GET
 http://127.0.0.1:8000/api/customers/

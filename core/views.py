@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import Customer, Meal, Order, Payment, User
-from . serializers import CustomerSerializer
+from . serializers import CustomerSerializer, MealSerializer
 from .permissions import IsAdmin, IsAdminOrWaiter # for authentication with roles
 from rest_framework import filters
 
@@ -34,3 +34,27 @@ class CustomerViewSet(viewsets.ModelViewSet):
             more = [IsAdminOrWaiter]
 
         return [perm() for perm in (base +more)]
+    
+class MealViewSet(viewsets.ModelViewSet):
+    # Admin or waiter can list, create, retrieve, update
+    # Only Admin can delete
+    # authentication is required for all operations
+
+    queryset = Meal.objects.all().order_by('date_created')
+    serializer_class = MealSerializer
+
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['name']
+    ordering_fields = ['date_created', 'price']
+
+    def get_permissions(self):
+        base = [IsAuthenticated]
+
+        if self.action == 'destroy':
+            more = [IsAdmin]
+
+        else:
+            more = [IsAdminOrWaiter]
+
+        return [perm() for perm in (base + more)]
+
