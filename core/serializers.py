@@ -36,8 +36,8 @@ class MealSerializer(serializers.ModelSerializer):
 # order serializer
 class OrderSerializer(serializers.ModelSerializer):
     #Has foreign customer, meal and user. I don't want them to be displayed as IDs so I will nest them
-    customer_name = CustomerSerializer(source='customer.full_name', read_only=True)
-    meal_name = MealSerializer(source='meal.name', read_only=True)
+    customer_name = serializers.CharField(source='customer.full_name', read_only=True)
+    meal_name = serializers.CharField(source='meal.name', read_only=True)
     class Meta:
         model = Order
         fields = [
@@ -79,7 +79,7 @@ class OrderSerializer(serializers.ModelSerializer):
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment
-        fields = ['id', 'order', 'amount', 'payment_date', 'status']
+        fields = ['id', 'order', 'amount', 'payment_method', 'payment_date']
         read_only_fields = ['id', 'payment_date']
         
     def validate_amount(self, value):
