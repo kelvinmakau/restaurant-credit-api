@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import Customer, Meal, Order, Payment, User
-from . serializers import CustomerSerializer, MealSerializer
+from . serializers import CustomerSerializer, MealSerializer, OrderSerializer
 from .permissions import IsAdmin, IsAdminOrWaiter # for authentication with roles
 from rest_framework import filters
 
@@ -58,3 +58,26 @@ class MealViewSet(viewsets.ModelViewSet):
 
         return [perm() for perm in (base + more)]
 
+# Order viewset
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all().order_by('-date_created') # Get all fields and order by the date of creation
+    serializer_class = OrderSerializer
+
+    # Add filters and orderingg
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['customer__full_name', 'meal__name', 'is_paid']
+    ordering_fields = ['date_created', 'is_paid']
+
+    def get_permissions(self):
+        base = [IsAuthenticated] # User has to be logged in
+
+        # Ensure only admins can delete orders
+        if self.action == 'destroy':
+            more = [IsAdmin]
+
+        else:
+            # Waiters and admins can create, update and view orders
+            more = [IsAdminOrWaiter]
+
+        return [perm() for perm in (base + more)]
+    
