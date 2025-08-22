@@ -7,7 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only = True, required=True)
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'email', 'role']
+        fields = ['id', 'username', 'password', 'email', 'role', 'phone_number']
         read_only_fields = ['id']
 
     def create(self, validated_data):
@@ -52,6 +52,7 @@ class OrderSerializer(serializers.ModelSerializer):
     #Has foreign customer, meal and user. I don't want them to be displayed as IDs so I will nest them
     customer_name = serializers.CharField(source='customer.full_name', read_only=True)
     meal_name = serializers.CharField(source='meal.name', read_only=True)
+    user_name = serializers.CharField(source='created_by.username', read_only=True)
     class Meta:
         model = Order
         fields = [
@@ -64,10 +65,11 @@ class OrderSerializer(serializers.ModelSerializer):
             'total_price', # Calculated automatically
             'date_created',
             'is_paid',
-            'created_by', # FK to User (Input as ID)
+            'created_by', # Automatically set from request.user, to avoid false entries
+            'user_name', # User name who created the order
         ]
 
-        read_only_fields = ['id', 'created_at', 'total_price', 'is_paid']
+        read_only_fields = ['id', 'date_created', 'total_price', 'is_paid', 'created_by']
 
     # Quantity validator Ensure its a positive value
     def validate_quantity(self, value):
@@ -76,6 +78,11 @@ class OrderSerializer(serializers.ModelSerializer):
         return value
     
     def create(self, validated_data):
+        # Automatically assign user of creating the order instead of manually doing it
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            validated_data["created_by"] = request.user
+
         # Compute total_price before saving the order
         meal = validated_data["meal"]
         quantity = validated_data["quantity"]
@@ -83,6 +90,11 @@ class OrderSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
     
     def update(self, instance, validated_data):
+        # Automatically assign user of updating the order instead of manually doing it
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            validated_data["created_by"] = request.user
+
         # Recalculate total if meal or quanity changes
         meal = validated_data.get("meal", instance.meal)
         quantity = validated_data.get("quantity", instance.quantity)
