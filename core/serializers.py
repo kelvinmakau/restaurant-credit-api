@@ -62,7 +62,7 @@ class OrderSerializer(serializers.ModelSerializer):
             'meal_name', # Meal name readonly
             'quantity',
             'total_price', # Calculated automatically
-            'created_at',
+            'date_created',
             'is_paid',
             'created_by', # FK to User (Input as ID)
         ]

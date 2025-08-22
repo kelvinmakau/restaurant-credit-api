@@ -46,7 +46,7 @@ class Order(models.Model):
     meal = models.ForeignKey(Meal, on_delete=models.CASCADE, related_name='orders') # Meal ordered
     quantity = models.PositiveIntegerField(default=1) # Quantity of the meal ordered
     total_price = models.DecimalField(max_digits=10, decimal_places=2) # Total price for the order
-    created_at = models.DateTimeField(auto_now_add=True) # Order creation time
+    date_created = models.DateTimeField(auto_now_add=True) # Order creation time
     is_paid = models.BooleanField(default=False) # Payment status of the order
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_orders') # User who created the order
 
