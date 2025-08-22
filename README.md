@@ -25,6 +25,7 @@
 ## Project Structure
 
 restaurant_credit/
+
 |--- core/ # Main app, handles every model users, customers, payments, orders and meals
 
 |--- restaurant_credit/ # Project settings and urls
