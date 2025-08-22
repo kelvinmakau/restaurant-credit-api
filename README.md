@@ -24,7 +24,7 @@
 
 ## Project Structure
 
-restaurant_credit/
+restaurant_credit/ # root folder
 
 |--- core/ # Main app, handles every model users, customers, payments, orders and meals
 
@@ -35,6 +35,8 @@ restaurant_credit/
 |--- db.sqlite3
 
 |--- README.md
+
+|--- requirements.txt
 
 ## Installation
 
