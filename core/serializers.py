@@ -103,9 +103,11 @@ class OrderSerializer(serializers.ModelSerializer):
     
 # payment serializer
 class PaymentSerializer(serializers.ModelSerializer):
+    meal_name = serializers.CharField(source='order.meal.name', read_only=True)
+    customer_name = serializers.CharField(source='order.customer.full_name', read_only=True)
     class Meta:
         model = Payment
-        fields = ['id', 'order', 'amount', 'payment_method', 'payment_date']
+        fields = ['id', 'order', 'meal_name', 'amount', 'payment_method', 'payment_date', 'customer_name']
         read_only_fields = ['id', 'payment_date']
         
     def validate_amount(self, value):
