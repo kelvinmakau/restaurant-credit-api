@@ -19,7 +19,7 @@
 - Python 3.11
 - Django 5.0.4
 - Django RESTFramework
-- Django JWT
+- Django simple JWT
 - SQlite - default but can be reconfigured to MySQL, POSTGRES etc
 
 ## Project Structure
