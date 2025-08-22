@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import Customer, Meal, Order, Payment, User
-from . serializers import CustomerSerializer, MealSerializer, OrderSerializer, PaymentSerializer
+from . serializers import CustomerSerializer, MealSerializer, OrderSerializer, PaymentSerializer, UserSerializer
 from .permissions import IsAdmin, IsAdminOrWaiter # for authentication with roles
 from rest_framework import filters
 
@@ -100,3 +100,16 @@ class PaymentViewset(viewsets.ModelViewSet):
             more = [IsAdminOrWaiter]
 
         return [perm() for perm in (base+more)]
+    
+# User viewset
+class UserViewset(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('username')
+    serializer_class = UserSerializer
+
+    def get_permissions(self):
+        # Only admins have access to this one
+
+        base = [IsAuthenticated]
+        more = [IsAdmin]
+
+        return [perm() for perm in (base + more)]

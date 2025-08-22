@@ -1,11 +1,25 @@
 from rest_framework import serializers
 from .models import User, Customer, Order, Payment, Meal
+from django.contrib.auth.hashers import make_password # To hash the password when creating a user
 
 # User serializer
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only = True, required=True)
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['id', 'username', 'password', 'email', 'role']
+        read_only_fields = ['id']
+
+    def create(self, validated_data):
+        # has password bedore saving when creating a user
+        validated_data['password'] = make_password(validated_data['password'])
+        return super().create(validated_data)
+    
+    def update(self, instance, validated_data):
+        # hash password after updaying
+        if 'password' in validated_data:
+            validated_data['password'] = make_password(validated_data['password'])
+        return super().create(instance, validated_data)
 
 # customer serializer
 class CustomerSerializer(serializers.ModelSerializer):
