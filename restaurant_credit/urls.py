@@ -17,12 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from core.views import CustomerViewSet, MealViewSet
+from core.views import CustomerViewSet, MealViewSet, OrderViewSet, PaymentViewset
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView # JWT endpoints
 
 router = DefaultRouter()
 router.register(r'customers', CustomerViewSet, basename='customer') # Registering the customer viewset with the router
 router.register(r'meals', MealViewSet, basename='meal') # Meal viewset router
+router.register(r'orders', OrderViewSet.as_view(), basename='order') #Order viewser router
+router.register(r'payments', PaymentViewset.as_view(), basename='payment') # Paymment viewset router
 
 
 urlpatterns = [
