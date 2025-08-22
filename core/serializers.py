@@ -62,7 +62,7 @@ class OrderSerializer(serializers.ModelSerializer):
             'meal', # FK to Meal (input as ID)
             'meal_name', # Meal name readonly
             'quantity',
-            'total_price', # Calculated automatically
+            'total_price', # Calculates automatically
             'date_created',
             'is_paid',
             'created_by', # Automatically set from request.user, to avoid false entries
@@ -112,4 +112,14 @@ class PaymentSerializer(serializers.ModelSerializer):
          if value <= 0:
             raise serializers.ValidationError("Payment amount must be greater than zero")
          return value
+    
+    # Update the is_paid field to true once a payment is done
+    # We are assuming that a payment is done in full
+    def create(self, validated_data):
+        payment = super().create(validated_data)
+        order = payment.order
+        total_paid = sum(p.amount for p in order.payments.all())
+        order.is_paid = total_paid >= order.total_price
+        order.save(update_fields = ["is_paid"])
+        return payment
     

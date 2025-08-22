@@ -66,4 +66,4 @@ class Payment(models.Model):
     payment_date = models.DateTimeField(auto_now_add=True) # Payment date
 
     def __str__(self):
-        return f"Payment for Order {self.order.id} - {self.amount}"
+        return f"Payment for Order {self.order.id} - {self.amount} for customer {self.order.customer.full_name}"
