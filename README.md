@@ -46,16 +46,16 @@ git clone `https://github.com/kelvinmakau/restaurant-credit-api.git`
 2. Create a virtual envrionment(optional but recommended)
 
 3. Install the dependencies, required modules
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 4. Run migrations
-python manage.py migrate
+`python manage.py migrate`
 
 5. Create superuser
-python manage.py createsuperuser
+`python manage.py createsuperuser`
 
 6. Run the server
-python manage.py runserver
+`python manage.py runserver`
 
 - If you don't change the port, it will run at `http://127.0.0.1:8000/api/`
 
@@ -64,54 +64,72 @@ python manage.py runserver
 - Users
 
 POST /api/users/ → Create user
+
 GET /api/users/ → List users
 
 - Customers
 
 POST /api/customers/ → Create customer
+
 GET /api/customers/ → List customers
 
 - Meals
 
 POST /api/meals/ → Add meal
+
 GET /api/meals/ → List meals
 
 - Orders
 
 POST /api/orders/ → Create order (auto-calculates total)
+
 GET /api/orders/ → List orders
 
 - Payments
 
 POST /api/payments/ → Make payment (auto-updates order’s is_paid)
+
 GET /api/payments/ → List payments
 
 ## Testing the Customer View
 
 Using Postman, use the below endpoints
+
 Get the auth token and input it at the Bearer Token in Postman using the following endpoint:
 `http://127.0.0.1:8000/api/auth-token`
 
-List all customers
+- List all customers
+
 GET
+
 `http://127.0.0.1:8000/api/customers/`
 
-Create a customer
+- Create a customer
+
 POST
+
 `http://127.0.0.1:8000/api/customers/`
 
-Retrieve one customer
+- Retrieve one customer
+
 GET
+
 `http://127.0.0.1:8000/api/customers/<id>/`
 
-Update a customer
+- Update a customer
+
 PUT
+
 `http://127.0.0.1:8000/api/customers/<id>/`
 
-Partial update
+- Partial update
+
 PATCH
+
 `http://127.0.0.1:8000/api/customers/<id>/`
 
-Delete a customer
+- Delete a customer
+
 DELETE
+
 `http://127.0.0.1:8000/api/customers/<id>/`
