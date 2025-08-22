@@ -61,31 +61,31 @@ git clone `https://github.com/kelvinmakau/restaurant-credit-api.git`
 
 ## API Endpoints
 
-- Users
+### Users
 
 POST /api/users/ → Create user
 
 GET /api/users/ → List users
 
-- Customers
+### Customers
 
 POST /api/customers/ → Create customer
 
 GET /api/customers/ → List customers
 
-- Meals
+### Meals
 
 POST /api/meals/ → Add meal
 
 GET /api/meals/ → List meals
 
-- Orders
+### Orders
 
 POST /api/orders/ → Create order (auto-calculates total)
 
 GET /api/orders/ → List orders
 
-- Payments
+### Payments
 
 POST /api/payments/ → Make payment (auto-updates order’s is_paid)
 
