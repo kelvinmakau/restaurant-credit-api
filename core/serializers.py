@@ -103,8 +103,8 @@ class OrderSerializer(serializers.ModelSerializer):
     
 # payment serializer
 class PaymentSerializer(serializers.ModelSerializer):
-    meal_name = serializers.CharField(source='order.meal.name', read_only=True)
-    customer_name = serializers.CharField(source='order.customer.full_name', read_only=True)
+    meal_name = serializers.CharField(source='order.meal.name', read_only=True) # Display meal ordered
+    customer_name = serializers.CharField(source='order.customer.full_name', read_only=True) # Show customer who made the order
     class Meta:
         model = Payment
         fields = ['id', 'order', 'meal_name', 'amount', 'payment_method', 'payment_date', 'customer_name']

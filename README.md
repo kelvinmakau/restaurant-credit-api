@@ -91,6 +91,35 @@ POST /api/payments/ → Make payment (auto-updates order’s is_paid)
 
 GET /api/payments/ → List payments
 
+## Search and Ordering
+
+### Search URLS
+
+`?search=<term>`
+
+Customers View
+
+- `/customers/?search=` - Input search criteria, either name, email or phone number
+
+Meals
+
+- `/meals/?search=` - Input search criteria, name
+
+Orders
+
+- `/orders/?search=` - Input search criteria, customer name, if order is paid(True, False), meal name
+
+Payments
+
+- `/payments/?search=` - Input the search criteria, customer name
+
+Ordering URLS
+
+- Can order by either ascending or descending order
+
+o `?ordering=<field>` - ascending order
+o `?ordering=-<field>` - descending order
+
 ## Testing the Customer View
 
 Using Postman, use the below endpoints
