@@ -57,13 +57,13 @@ REST_FRAMEWORK = {
 
 # JWT settings
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60), # Access token valid for 60 minutes
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=600), # Access token valid for 60 minutes
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1), # Refresh token valid for 1 day
 }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # Whitenoise middleware for serving static files
+    # 'whitenoise.middleware.WhiteNoiseMiddleware', # Whitenoise middleware for serving static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -71,8 +71,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # Whitenoise static files storage
 
 ROOT_URLCONF = 'restaurant_credit.urls'
 
@@ -105,8 +103,8 @@ DATABASES = {
     }
 }
 
-# Heroku DB config
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# # Heroku DB config
+# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -144,7 +142,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = 'static/'
 
 # Default primary key field type
