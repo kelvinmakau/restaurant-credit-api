@@ -51,7 +51,10 @@ INSTALLED_APPS = [
 # DRF
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication', # JWT Authentication
+        'rest_framework.authentication.SessionAuthentication', # Session authentication for browsable API
+        'rest_framework.authentication.BasicAuthentication', # Basic authentication
+
     ),
 }
 
