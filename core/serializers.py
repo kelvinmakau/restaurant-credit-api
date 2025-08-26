@@ -7,7 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only = True, required=True)
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'email', 'role', 'phone_number']
+        fields = ['id', 'username', 'password', 'email', 'role', 'phone_number', 'is_staff', 'is_superuser']
         read_only_fields = ['id']
 
     def create(self, validated_data):
@@ -19,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
         # hash password after updaying
         if 'password' in validated_data:
             validated_data['password'] = make_password(validated_data['password'])
-        return super().create(instance, validated_data)
+        return super().update(instance, validated_data)
 
 # customer serializer
 class CustomerSerializer(serializers.ModelSerializer):
