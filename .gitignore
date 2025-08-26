@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+
+# Virtual environment
+venv/
+env/
+ENV/
+*.env
+*.venv
+
+# IDE / Editor settings
+.vscode/
+.idea/
+
+# Django stuff:
+db.sqlite3
+*.log
+media/
+
+# Static files (collected via collectstatic)
+staticfiles/
+
+# Local settings
+settings_local.py
+
+# Migrations cache
+*/migrations/__pycache__/
+*.pyc
+
+# Coverage / Testing
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
