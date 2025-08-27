@@ -127,6 +127,46 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[{asctime}] {levelname} {name}: {message}',
+            'style': '{',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+    },
+    'handlers': {
+        'request_file':{
+            'level': 'INFO', # Log all info and above
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/requests.log'),
+            'formatter': 'verbose',
+        },
+        
+        'error_file':{
+            'level': 'ERROR', # Only log errors and above
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/errors.log'),
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': { # Catch all requests to the server
+        'django.server': {
+            'handlers': ['request_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django': { # Catch all errors from Django
+            'handlers': ['error_file'],
+            'level': 'ERROR',
+            'propagate': True,
+        }
+    }
+    
+}
+
 AUTH_USER_MODEL = 'core.User'  # My Custom user model
 
 
