@@ -51,7 +51,7 @@ class Order(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders') # User who created the order
 
     def __str__(self):
-        return f"Order {self.id} by {self.customer.full_name}"
+        return f"Order {self.id} for {self.meal} by {self.customer.full_name} worth {self.total_price}"
     
 # Payment
 class Payment(models.Model):
