@@ -5,6 +5,7 @@ from .models import Customer, Meal, Order, Payment, User
 from . serializers import CustomerSerializer, MealSerializer, OrderSerializer, PaymentSerializer, UserSerializer
 from .permissions import IsAdmin, IsAdminOrWaiter # for authentication with roles
 from rest_framework import filters
+from django.db.models import Sum, Q
 
 # Create your views here.
 # I am adding viewsets for the serializers so that I can send and retrieve data with the API
@@ -21,6 +22,15 @@ class CustomerViewSet(viewsets.ModelViewSet):
     search_fields = ['full_name', 'phone_number', 'email']
     ordering_fields = ['date_created']
 
+    # Displayed total credit for a customer and total payments made
+    def get_queryset(self):
+        return Customer.objects.annotate(
+            total_paid = Sum('orders__total_price', filter=Q(orders__is_paid=True)), # Sum of all paid orders
+            total_unpaid = Sum('orders__total_price', filter=Q(orders__is_paid=False)) # Sum of all unpaid orders
+        )
+
+    
+    # Set permissions based on action
     def get_permissions(self):
         # Ensure that user is always authenticated
         base = [IsAuthenticated]

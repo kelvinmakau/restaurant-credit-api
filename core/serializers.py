@@ -23,9 +23,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 # customer serializer
 class CustomerSerializer(serializers.ModelSerializer):
+    total_paid = serializers.DecimalField(max_digits=10, decimal_places=2, read_only=True)
+    total_unpaid = serializers.DecimalField(max_digits=10, decimal_places=2, read_only=True)
     class Meta:
         model = Customer
-        fields = ['id', 'full_name', 'phone_number', 'email', 'date_created']
+        fields = ['id', 'full_name', 'phone_number', 'email', 'date_created', 'total_paid', 'total_unpaid']
         read_only_fields = ['id', 'date_created']
 
     # Ensure that API does not send blank values for the name
