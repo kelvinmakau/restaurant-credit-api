@@ -43,7 +43,23 @@ restaurant_credit/ # root folder
 1. Clone this repo:
 git clone `https://github.com/kelvinmakau/restaurant-credit-api.git`
 
-2. Create a virtual envrionment(optional but recommended)
+2. Create a virtual envrionment(optional but recommended) and activate it
+
+    On Windows
+
+    - `cd restaurant-credit-api` - Open terminal/command prompt in the project folder
+
+    - `python -m venv myvenv` - Create the virtual environment
+
+    - `myenv\Scripts\activate` - Activate your environment
+
+    On Linux/Mac
+
+    - `cd restaurant-credit-api` - Open terminal/command prompt in the project folder
+
+    - `python -m venv myvenv` - Create the virtual environment
+
+    - `source myenv/bin/activate` - Activate your environment
 
 3. Install the dependencies, required modules
 `pip install -r requirements.txt`
@@ -57,7 +73,7 @@ git clone `https://github.com/kelvinmakau/restaurant-credit-api.git`
 6. Run the server
 `python manage.py runserver`
 
-- If you don't change the port, it will run at `http://127.0.0.1:8000/api/`
+- If you don't change the port, it should run at `http://127.0.0.1:8000/api/`
 
 ## API Endpoints
 
