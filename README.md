@@ -112,7 +112,9 @@ GET /api/payments/ → List payments
 - If you want to delete or retrieve an object(customer, user, meal, order, payment), append the id to the specific object at the end of a url
 
 for instance:
+
     - GET /api/orders/1/ - Retrieves order with id 1
+
     - DELETE /api/orders/1/ - Deletes order with id 1
 
 ## Search and Ordering
