@@ -83,7 +83,8 @@ POST /api/users/ → Create user
 
 data
 
-``{
+``` json
+{
 
     "username": "kelia",
 
@@ -98,7 +99,8 @@ data
     "is_staff": true,
 
     "is_superuser": false
-}``
+}
+```
 
 Only set is_staff = true if you want the user to be able to access the admin page
 
@@ -109,8 +111,8 @@ GET /api/users/ → List users
 POST /api/customers/ → Create customer
 
 data
-``` json
 
+``` json
 {
 
   "full_name": "Jane Mafia",
