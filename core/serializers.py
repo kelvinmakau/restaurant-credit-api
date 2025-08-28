@@ -111,11 +111,18 @@ class PaymentSerializer(serializers.ModelSerializer):
         model = Payment
         fields = ['id', 'order', 'meal_name', 'amount', 'payment_method', 'payment_date', 'customer_name']
         read_only_fields = ['id', 'payment_date']
-        
+
+     # Payment amount should be more than zero   
     def validate_amount(self, value):
-         if value <= 0:
+        if value <= 0:
             raise serializers.ValidationError("Payment amount must be greater than zero")
-         return value
+        return value
+    
+    # Check if order is already paid bedore accepting payment
+    def validate_order(self, value):
+        if value.is_paid:
+            raise serializers.ValidationError("This order is already paid")
+        return value
     
     # Update the is_paid field to true once a payment is done
     # We are assuming that a payment is done in full
