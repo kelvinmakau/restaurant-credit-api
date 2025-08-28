@@ -81,6 +81,19 @@ git clone `https://github.com/kelvinmakau/restaurant-credit-api.git`
 
 POST /api/users/ → Create user
 
+data
+
+`{
+    "username": "kelia",
+    "password": "1234",
+    "email": "kelia@kelly.com",
+    "role": "WAITER",
+    "phone_number": "0708010107",
+    "is_staff": true,
+    "is_superuser": false
+}`
+Only set is_staff = true if you want the user to be able to access the admin page
+
 GET /api/users/ → List users
 
 ### Customers
