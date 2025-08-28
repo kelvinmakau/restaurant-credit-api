@@ -83,7 +83,7 @@ POST /api/users/ → Create user
 
 data
 
-`{
+``{
 
     "username": "kelia",
 
@@ -98,7 +98,7 @@ data
     "is_staff": true,
 
     "is_superuser": false
-}`
+}``
 
 Only set is_staff = true if you want the user to be able to access the admin page
 
