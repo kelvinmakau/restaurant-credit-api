@@ -81,23 +81,16 @@ git clone `https://github.com/kelvinmakau/restaurant-credit-api.git`
 
 POST /api/users/ → Create user
 
-data
+sample data
 
 ``` json
 {
-
     "username": "kelia",
-
     "password": "1234",
-
     "email": "kelia@kelly.com",
-
     "role": "WAITER",
-
     "phone_number": "0708010107",
-
     "is_staff": true,
-
     "is_superuser": false
 }
 ```
@@ -106,19 +99,31 @@ Only set is_staff = true if you want the user to be able to access the admin pag
 
 GET /api/users/ → List users
 
+sample response
+
+```json
+{
+    "id": 8,
+    "username": "kelia",
+    "email": "kelia@kelly.com",
+    "role": "WAITER",
+    "phone_number": "0708010107",
+    "is_staff": true,
+    "is_superuser": false
+}
+```
+
 ### Customers
 
 POST /api/customers/ → Create customer
 
-data
+sample data
 
 ``` json
 {
 
   "full_name": "Jane Mafia",
-
   "phone_number": "0722000000",
-
   "email": "jane@gmail.com"
 
 }
@@ -127,23 +132,109 @@ data
 
 GET /api/customers/ → List customers
 
+```json
+{
+    "id": 5,
+    "full_name": "Jane Mafia",
+    "phone_number": "0722000000",
+    "email": "jane@gmail.com",
+    "date_created": "2025-08-22",
+    "total_paid": "2100.00",
+    "total_unpaid": null
+}
+```
+
 ### Meals
 
 POST /api/meals/ → Add meal
 
+sample data
+
+``` json
+{
+    "name": "Rice chicken",
+    "description": "Just rice",
+    "price": "200.00"
+}
+```
+
 GET /api/meals/ → List meals
+
+sample response
+
+``` json
+{
+    "id": 3,
+    "name": "Rice chicken",
+    "description": "Just rice",
+    "price": "200.00",
+    "date_created": "2025-08-28"
+}
+```
 
 ### Orders
 
 POST /api/orders/ → Create order (auto-calculates total)
 
+sample data
+
+```json
+{
+  "customer": 5,
+  "meal": 3,
+  "quantity": 1
+}
+```
+
 GET /api/orders/ → List orders
+
+sample response
+
+```json
+{
+    "id": 6,
+    "customer": 5,
+    "customer_name": "Jane Mafia",
+    "meal": 3,
+    "meal_name": "Rice chicken",
+    "quantity": 1,
+    "total_price": "200.00",
+    "date_created": "2025-08-28T13:52:51.053763+03:00",
+    "is_paid": false,
+    "created_by": 1,
+    "user_name": "admin"
+}
+```
 
 ### Payments
 
 POST /api/payments/ → Make payment (auto-updates order’s is_paid)
 
+sample data
+
+```json
+{
+  "order": 6,
+  "amount": 200.00,
+  "payment_method": "MPESA"
+}
+```
+
 GET /api/payments/ → List payments
+
+sample response
+
+```json
+{
+    "id": 8,
+    "order": 6,
+    "meal_name": "Rice chicken",
+    "amount": "200.00",
+    "payment_method": "MPESA",
+    "payment_date": "2025-08-28T13:56:21.152986+03:00",
+    "customer_name": "Jane Mafia"
+}
+```
 
 #### DELETING AND GETTING SINGLE OBJECTS
 
@@ -151,9 +242,9 @@ GET /api/payments/ → List payments
 
 for instance:
 
-    - GET /api/orders/1/ - Retrieves order with id 1
+- GET /api/orders/1/ - Retrieves order with id 1
 
-    - DELETE /api/orders/1/ - Deletes order with id 1
+- DELETE /api/orders/1/ - Deletes order with id 1
 
 ## Search and Ordering
 
