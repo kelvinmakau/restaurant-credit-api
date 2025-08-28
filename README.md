@@ -109,16 +109,19 @@ GET /api/users/ → List users
 POST /api/customers/ → Create customer
 
 data
+``` json
 
-`{
+{
 
   "full_name": "Jane Mafia",
 
   "phone_number": "0722000000",
 
-  "email": "`jane@gmail.com`"
+  "email": "jane@gmail.com"
 
-}`
+}
+
+```
 
 GET /api/customers/ → List customers
 
