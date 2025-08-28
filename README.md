@@ -232,7 +232,8 @@ sample response
     "amount": "200.00",
     "payment_method": "MPESA",
     "payment_date": "2025-08-28T13:56:21.152986+03:00",
-    "customer_name": "Jane Mafia"
+    "customer_name": "Jane Mafia",
+    "processed_by": "admin"
 }
 ```
 
