@@ -77,6 +77,30 @@ git clone `https://github.com/kelvinmakau/restaurant-credit-api.git`
 
 ## API Endpoints
 
+- First you need to get the auth-token before you can do anything
+
+POST /api/auth-token
+
+sample data
+
+```json
+{
+    "username": "admin",
+    "password": "1234"
+}
+```
+
+sample output
+
+```json
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NjU4NzQxMCwiaWF0IjoxNzU2NTAxMDEwLCJqdGkiOiJkZDhmMWJlZDQ5YjI0OGI5YWFjYzFiODM2YTU1YjAyMyIsInVzZXJfaWQiOiIxIn0.7nSBnp6OFoY45Wpasyy83AtJSl0oLMkGEPCqBA81Pts",
+    "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2NTM3MDEwLCJpYXQiOjE3NTY1MDEwMTAsImp0aSI6ImYzY2M2ODJmYzgxNDQ3MWRhNWRiMzk2ODVkZGQ2ZmM5IiwidXNlcl9pZCI6IjEifQ.Gbh1wAELMrdYG7fIFmkgwri-vx5FEuHRcXFAqJQ0thk"
+}
+```
+
+- You then need to copy the access token and paste it in your testing environment, under Authorization, bearer token
+
 ### Users
 
 POST /api/users/ → Create user
