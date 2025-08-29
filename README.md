@@ -103,6 +103,8 @@ sample output
 
 ### Users
 
+- When you create your superuser with `python manage.py createsuperuser` login to admin page and assign him the role ADMIN, so that you will be able to create users through the endpoints
+
 POST /api/users/ → Create user
 
 sample data
