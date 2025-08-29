@@ -128,7 +128,10 @@ class PaymentSerializer(serializers.ModelSerializer):
     # Update the is_paid field to true once a payment is done
     # We are assuming that a payment is done in full
     def create(self, validated_data):
-        payment = super().create(validated_data)
+        request = self.context.get("request") # 
+        user = request.user if request else None
+
+        payment = Payment.objects.create(user=user, **validated_data) # Create payment with the user who processed it
         order = payment.order
         total_paid = sum(p.amount for p in order.payments.all())
         order.is_paid = total_paid >= order.total_price
